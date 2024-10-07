@@ -1,10 +1,20 @@
 class Solution(object):
     def isValid(self, s):
-        for i in range(len(s)):
-        if s[i]=='(' and s[i+1]==')': return True
-        if s[i]=='[' and s[i+1]==']': return True
-        if s[i]=='{' and s[i+1]=='}': return True
-        else: return False
+        bracket_map = {
+            ')': '(',
+            '}': '{',
+            ']': '['
+            }
+        
+        stack = []
+        for char in s:
+            if char in bracket_map:
+                top_element = stack.pop() if stack else '#'
+                if bracket_map[char] != top_element:
+                    return False
+            else:
+                stack.append(char)
+        return not stack
 
 
 
